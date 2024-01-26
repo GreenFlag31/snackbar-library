@@ -1,0 +1,42 @@
+.snackbar-container {
+  min-width: 350px;
+  padding: 0.625rem;
+  background: #3e3e3e;
+  color: #fff;
+}
+.snackbar-container h5 {
+  font-family: "Allura";
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: #fff;
+}
+.answer-confirm {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 3rem;
+}
+.answer-confirm input {
+  background: inherit;
+  border: 1px solid hotpink;
+  outline: none;
+}
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+.actions button {
+  padding: 0.35em 1rem;
+  background: hotpink;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.answer {
+  padding: 0.2em 0.5rem;
+  border: none;
+  font-size: 0.9rem;
+  color: #fff;
+}

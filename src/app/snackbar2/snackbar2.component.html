@@ -1,0 +1,9 @@
+<div class="snackbar-container">
+  <h5>{{ text }}</h5>
+  <div class="answer-confirm">
+    <input class="answer" type="text" [(ngModel)]="response" />
+    <div class="actions">
+      <button class="confirm" (click)="onConfirm()">Confirm</button>
+    </div>
+  </div>
+</div>

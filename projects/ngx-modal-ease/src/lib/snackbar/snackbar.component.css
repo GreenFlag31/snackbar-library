@@ -1,0 +1,144 @@
+.ngx-snackbar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.5rem;
+  max-width: 100%;
+  z-index: 2000;
+}
+
+/* top: '90%',
+left: '15%', */
+@keyframes going-right-enter {
+  from {
+    transform: translate(-200%, -50%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes going-right-leave {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-200%, -50%);
+  }
+}
+
+/* top: '90%',
+left: '80%', */
+@keyframes going-left-enter {
+  from {
+    transform: translate(100%, -50%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes going-left-leave {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(100%, -50%);
+  }
+}
+
+/* top: '15%',
+left: '50%', */
+@keyframes going-down-enter {
+  from {
+    transform: translate(-50%, -200%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes going-down-leave {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-50%, -200%);
+  }
+}
+
+/* top: '90%',
+left: '50%', */
+@keyframes going-up-enter {
+  from {
+    transform: translate(-50%, 100%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes going-up-leave {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-50%, 100%);
+  }
+}
+
+/* top: '90%',
+left: '50%', */
+@keyframes scale-enter {
+  from {
+    transform: scale(0.9) translate(-50%, -50%);
+    transform-origin: left;
+  }
+  to {
+    transform: scale(1) translate(-50%, -50%);
+    transform-origin: left;
+  }
+}
+
+/* Recommended: 0.7s linear */
+@keyframes bounce-in {
+  0% {
+    transform: translate(-50%, -85%);
+  }
+  18% {
+    transform: translate(-50%, -50%);
+  }
+  60% {
+    transform: translate(-50%, -65%);
+  }
+  80% {
+    transform: translate(-50%, -50%);
+  }
+  90% {
+    transform: translate(-50%, -53%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Recommended: 0.3s linear */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Recommended: 0.3s linear */
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
