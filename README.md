@@ -42,7 +42,7 @@ Config {
   <!-- maximum number of snackbars on a page -->
   maximum?: number;
 
-  <!-- close active snackbar on navigation -->
+  <!-- close active snackbars on navigation -->
   closeOnNavigation?: boolean;
 }
 ```
@@ -97,6 +97,8 @@ Position =
 | <span style="background-color:#f2f2f2;">padding</span>   | <span style="background-color:#f2f2f2;">0 0.5</span> | <span style="background-color:#f2f2f2;">Padding to be applied on the snackbar in rem. Can be defined in any measure unit.</span>                                                                      |
 | <span style="background-color:#f2f2f2;">data</span>      | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Data communication between components under the form of key-value pairs. Any type of data is supported.</span>                                                |
 
+You have the choice for positioning between a generic positioning or fine grained control with `top` and `left` values.
+
 # Complete Example
 
 Inject the snackbarService through regular dependency injection in your component.
@@ -128,7 +130,8 @@ In the following example, `snackbarContentComponent` is the content of the snack
 Any type of data can be provided between components. Create the corresponding property (here, `color`) in your component (here, `SnackbarContentComponent`) and the property will be assigned with the provided value.
 
 In your `SnackbarContentComponent`:
-To pass information from the `SnackbarContentComponent` to your current component, inject the `SnackbarService` through regular dependency injection and call the `close(this, data)` method from the service with any data you wish to send back to your component. This method returns an RxJs subject, so subscribe to it as shown in the above example. It is not necessary to unsubscribe from the subscription since it will automatically `complete()` in the service. Passing `this` as first argument is necessary to identify the current snackbar instance (there can be multiple snackbars).
+To pass information from the `SnackbarContentComponent` to your current component, inject the `SnackbarService` through regular dependency injection and call the `close(this, data)` method from the service with any data you wish to send back to your component. This method returns an RxJs subject, so subscribe to it as shown in the above example. It is not necessary to unsubscribe from the subscription since it will automatically `complete()` in the service.
+Passing `this` as first argument is necessary to identify the current snackbar instance (there can be multiple snackbars).
 
 ```
   <!-- Inside SnackbarContentComponent -->
