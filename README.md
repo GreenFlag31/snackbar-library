@@ -47,7 +47,7 @@ Config {
 }
 ```
 
-Simply pass `SnackbarModule.forRoot()` if you want to leave it default.
+Simply pass `SnackbarModule.forRoot()` to leave it default.
 
 # Options
 
@@ -88,8 +88,8 @@ Position =
 | -------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <span style="background-color:#f2f2f2;">enter</span>     | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Define the enter animation for the snackbar respecting the [shorthand animation property](https://developer.mozilla.org/en-US/docs/Web/CSS/animation). See predefined animations [here](#ready-to-use).</span> |
 | leave                                                    |                                                      | Define the leave animation for the snackbar respecting the [shorthand animation property](https://developer.mozilla.org/en-US/docs/Web/CSS/animation). See predefined animations [here](#ready-to-use).                                                |
-| <span style="background-color:#f2f2f2;">top</span>       | <span style="background-color:#f2f2f2;">50</span>    | <span style="background-color:#f2f2f2;">Top position of the snackbar in percent. Can be defined in any measure unit.</span>                                                                                                                            |
-| left                                                     | 50                                                   | Left position of the snackbar in percent. Can be defined in any measure unit.                                                                                                                                                                          |
+| <span style="background-color:#f2f2f2;">top</span>       | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Top position of the snackbar in percent. Can be defined in any measure unit.</span>                                                                                                                            |
+| left                                                     |                                                      | Left position of the snackbar in percent. Can be defined in any measure unit.                                                                                                                                                                          |
 | <span style="background-color:#f2f2f2;">position</span>  | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Generic positioning of the snackbar respecting the `Position` type (see above).</span>                                                                                                                         |
 | <span style="background-color:#f2f2f2;">duration</span>  | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Duration of the snackbar in ms.</span>                                                                                                                                                                         |
 | <span style="background-color:#f2f2f2;">minHeight</span> | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Minimum height of the snackbar. Can be defined in any measure unit.</span>                                                                                                                                     |
@@ -170,114 +170,112 @@ This library comes with predefined and ready-to-use animations keyframes. Just f
 /* Recommended: 0.3s ease-out */
 @keyframes going-right-enter {
   from {
-    transform: translate(-200%, -50%);
+    transform: translateX(-150%);
   }
   to {
-    transform: translate(-50%, -50%);
+    transform: translateX(0);
   }
 }
 
 /* Recommended: 0.3s ease-out */
 @keyframes going-right-leave {
   from {
-    transform: translate(-50%, -50%);
+    transform: translateX(0);
   }
   to {
-    transform: translate(-200%, -50%);
+    transform: translateX(-150%);
   }
 }
 
-/* Recommended: 0.3s ease-out */
+/* Recommended: 0.3s ease-in */
 @keyframes going-left-enter {
   from {
-    transform: translate(100%, -50%);
+    transform: translateX(150%);
   }
   to {
-    transform: translate(-50%, -50%);
+    transform: translateX(0%);
   }
 }
 
-/* Recommended: 0.3s ease-out */
+/* Recommended: 0.3s ease-in */
 @keyframes going-left-leave {
   from {
-    transform: translate(-50%, -50%);
+    transform: translateX(0%);
   }
   to {
-    transform: translate(100%, -50%);
+    transform: translateX(150%);
   }
 }
 
 /* Recommended: 0.3s ease-out */
 @keyframes going-down-enter {
   from {
-    transform: translate(-50%, -200%);
+    transform: translateY(-150%);
   }
   to {
-    transform: translate(-50%, -50%);
+    transform: translateY(0%);
   }
 }
 
-/* Recommended: 0.3s ease-out */
+/* Recommended: 0.3s ease-in */
 @keyframes going-down-leave {
   from {
-    transform: translate(-50%, -50%);
+    transform: translateY(0%);
   }
   to {
-    transform: translate(-50%, -200%);
+    transform: translateY(-150%);
   }
 }
 
 /* Recommended: 0.3s ease-out */
 @keyframes going-up-enter {
   from {
-    transform: translate(-50%, 100%);
+    transform: translateY(150%);
   }
   to {
-    transform: translate(-50%, -50%);
+    transform: translateY(0);
   }
 }
 
-/* Recommended: 0.3s ease-out */
+/* Recommended: 0.3s ease-in */
 @keyframes going-up-leave {
   from {
-    transform: translate(-50%, -50%);
+    transform: translateY(0);
   }
   to {
-    transform: translate(-50%, 100%);
+    transform: translateY(150%);
   }
 }
 
 /* Recommended: 0.2s ease-out */
 @keyframes scale-enter {
   from {
-    transform: scale(0.9) translate(-50%, -50%);
-    transform-origin: left;
+    transform: scale(0.9);
   }
   to {
-    transform: scale(1) translate(-50%, -50%);
-    transform-origin: left;
+    transform: scale(1);
   }
 }
 
 /* Recommended: 0.7s linear */
 @keyframes bounce-in {
   0% {
-    transform: translate(-50%, -85%);
+    transform: translateY(-35%);
   }
   18% {
-    transform: translate(-50%, -50%);
+    transform: translateY(0);
   }
   60% {
-    transform: translate(-50%, -65%);
+    transform: translateY(-15%);
   }
   80% {
-    transform: translate(-50%, -50%);
+    transform: translateY(0);
   }
   90% {
-    transform: translate(-50%, -53%);
+    transform: translateY(-3%);
   }
   100% {
-    transform: translate(-50%, -50%);
+    transform: translateY(0);
   }
 }
 
@@ -306,7 +304,7 @@ If you create your own keyframes, I would recommend to create a new file `snackb
 
 # Responsive
 
-Snackbars are responsive and will correctly render on smaller devices (debounced).
+Snackbars are responsive and will correctly render on smaller devices.
 
 # SSR (Server Side Rendering)
 

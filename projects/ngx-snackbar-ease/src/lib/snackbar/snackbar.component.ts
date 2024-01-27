@@ -59,8 +59,9 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
       parseFloat(paddingLeft) + parseFloat(paddingRight);
 
     this.snackbar.nativeElement.style.left = this.originalLeftPosition;
+
     if (window.innerWidth < width + horizontalPaddings) {
-      this.snackbar.nativeElement.style.left = `${width / 2}px`;
+      this.snackbar.nativeElement.style.left = '0';
     }
   }
 
@@ -90,8 +91,7 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
       this.options?.size?.padding || '0 0.5rem';
 
     this.snackbarLeaveAnimation = this.options?.snackbar?.leave || '';
-    this.snackbar.nativeElement.style.animation =
-      this.options?.snackbar?.enter || '';
+
     const genericPosition = this.options?.snackbar?.position;
 
     if (this.options?.snackbar?.top && this.options.snackbar.left) {
@@ -113,7 +113,15 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
       }, duration);
     }
 
+    this.snackbar.nativeElement.style.animation =
+      this.options?.snackbar?.enter || '';
     this.originalLeftPosition = this.snackbar.nativeElement.style.left;
+
+    const wrapperOfContent = this.snackbar.nativeElement.firstChild
+      ?.firstChild as HTMLElement | undefined;
+    if (wrapperOfContent) {
+      wrapperOfContent.style.boxSizing = 'border-box';
+    }
   }
 
   /**
@@ -124,29 +132,25 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
       this.snackbar.nativeElement.getBoundingClientRect();
 
     if (position === 'bottom') {
-      this.snackbar.nativeElement.style.top = `calc(100% - ${
-        height / 2
-      }px - 10px)`;
+      this.snackbar.nativeElement.style.top = `calc(100% - ${height}px - 10px)`;
+      this.snackbar.nativeElement.style.left = `calc(50% - ${width / 2}px)`;
       return;
     } else if (position === 'top') {
-      this.snackbar.nativeElement.style.top = `calc(${height / 2}px + 10px)`;
+      this.snackbar.nativeElement.style.top = '10px';
+      this.snackbar.nativeElement.style.left = `calc(50% - ${width / 2}px)`;
       return;
     }
 
     if (position.includes('bottom')) {
-      this.snackbar.nativeElement.style.top = `calc(100% - ${
-        height / 2
-      }px - 50px)`;
+      this.snackbar.nativeElement.style.top = `calc(100% - ${height}px - 50px)`;
     } else {
-      this.snackbar.nativeElement.style.top = `calc(${height / 2}px + 50px)`;
+      this.snackbar.nativeElement.style.top = '50px';
     }
 
     if (position.includes('left')) {
-      this.snackbar.nativeElement.style.left = `calc(${width / 2}px + 20px)`;
+      this.snackbar.nativeElement.style.left = '20px';
     } else {
-      this.snackbar.nativeElement.style.left = `calc(100% - ${
-        width / 2
-      }px - 20px)`;
+      this.snackbar.nativeElement.style.left = `calc(100% - ${width}px - 20px)`;
     }
   }
 
