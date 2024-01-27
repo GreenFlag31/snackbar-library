@@ -131,6 +131,7 @@ Any type of data can be provided between components. Create the corresponding pr
 
 In your `SnackbarContentComponent`:
 To pass information from the `SnackbarContentComponent` to your current component, inject the `SnackbarService` through regular dependency injection and call the `close(this, data)` method from the service with any data you wish to send back to your component. This method returns an RxJs subject, so subscribe to it as shown in the above example. It is not necessary to unsubscribe from the subscription since it will automatically `complete()` in the service.
+
 Passing `this` as first argument is necessary to identify the current snackbar instance (there can be multiple snackbars).
 
 ```
