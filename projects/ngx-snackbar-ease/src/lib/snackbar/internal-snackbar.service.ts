@@ -13,7 +13,7 @@ import { Options } from './snackbar-options';
 import { Subject, filter } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { NgxSnackbar } from './snackbar.component';
-import { Config } from './config';
+import { Config, SubjectID } from './config';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Injectable({
@@ -27,6 +27,7 @@ export class InternalSnackbarService {
   snackbarInstances: NgxSnackbar[] = [];
   uniqueSnackbarID = 0;
   private isBrowser = true;
+  private subjectsAndItsID: SubjectID[] = [];
 
   constructor(
     private appRef: ApplicationRef,
@@ -52,9 +53,9 @@ export class InternalSnackbarService {
     }
 
     this.options = options;
+    this.snackbarSubject = new Subject();
     this.openComponent(componentToCreate, options);
 
-    this.snackbarSubject = new Subject();
     return this.snackbarSubject;
   }
 
@@ -71,6 +72,7 @@ export class InternalSnackbarService {
     });
 
     this.instantiateProps(options?.data);
+    this.subjectsAndItsID.push({ subject: this.snackbarSubject });
     document.body.appendChild(this.newSnackbarComponent.location.nativeElement);
 
     this.appRef.attachView(this.snackbarContentCp.hostView);
@@ -102,10 +104,11 @@ export class InternalSnackbarService {
     this.snackbarInstances[indexCurrentInstance].close();
     this.snackbarInstances.splice(indexCurrentInstance, 1);
 
-    this.snackbarSubject.next(data);
-    if (this.snackbarInstances.length === 0) {
-      this.snackbarSubject.complete();
-    }
+    const currentSubject = this.subjectsAndItsID[indexCurrentInstance].subject;
+    currentSubject.next(data);
+    currentSubject.complete();
+
+    this.subjectsAndItsID.splice(indexCurrentInstance, 1);
   }
 
   closeAll() {
@@ -114,5 +117,6 @@ export class InternalSnackbarService {
     }
 
     this.snackbarInstances = [];
+    this.subjectsAndItsID = [];
   }
 }

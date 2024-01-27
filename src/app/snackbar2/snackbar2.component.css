@@ -1,5 +1,6 @@
 .snackbar-container {
-  min-width: 350px;
+  width: 350px;
+  max-width: 100%;
   padding: 0.625rem;
   background: #3e3e3e;
   color: #fff;
@@ -16,7 +17,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 3rem;
 }
 .answer-confirm input {
   background: inherit;

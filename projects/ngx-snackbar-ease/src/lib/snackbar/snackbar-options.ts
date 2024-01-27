@@ -4,6 +4,7 @@ export interface Options {
     leave?: string;
     top?: string;
     left?: string;
+    position?: Position;
     duration?: number;
   };
   size?: {
@@ -17,3 +18,11 @@ export interface Options {
     [key: string]: unknown;
   };
 }
+
+export type Position =
+  | 'bottom-left'
+  | 'bottom'
+  | 'bottom-right'
+  | 'top-left'
+  | 'top'
+  | 'top-right';

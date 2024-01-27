@@ -3,7 +3,7 @@ import { SnackbarContentComponent } from '../snackbar/snackbar.component';
 import { RouterModule } from '@angular/router';
 import { Snackbar2Component } from '../snackbar2/snackbar2.component';
 import { FormsModule } from '@angular/forms';
-import { SnackbarService } from '../../../projects/ngx-modal-ease/src/lib/snackbar/snackbar.service';
+import { SnackbarService } from '../../../projects/ngx-snackbar-ease/src/public-api';
 
 @Component({
   selector: 'app-main',
@@ -14,7 +14,7 @@ import { SnackbarService } from '../../../projects/ngx-modal-ease/src/lib/snackb
 })
 export class MainComponent {
   S0 = {
-    animation: 'going-up-enter',
+    animation: 'going-right-enter',
     duration: '0.2s',
     easing: 'linear',
   };
@@ -26,8 +26,9 @@ export class MainComponent {
   onS0Open() {
     this.snackbarService.open(SnackbarContentComponent, {
       snackbar: {
-        top: 'calc(100% - 40px)',
-        left: '50%',
+        // top: 'calc(100% - 40px)',
+        // left: '50%',
+        position: 'bottom-left',
         enter: `${this.S0.animation} ${this.S0.duration} ${this.S0.easing}`,
       },
     });
@@ -40,7 +41,7 @@ export class MainComponent {
         left: '50%',
         enter: 'going-down-enter 0.3s',
         leave: 'going-down-leave 0.3s',
-        duration: 2000,
+        // duration: 2000,
       },
       data: {
         bgColor: 'blueviolet',
@@ -55,7 +56,7 @@ export class MainComponent {
         left: 'calc(100% - 185px)',
         enter: 'going-left-enter 0.3s',
         leave: 'going-left-leave 0.3s',
-        duration: 4000,
+        // duration: 4000,
       },
       data: {
         bgColor: 'blue',
@@ -70,7 +71,7 @@ export class MainComponent {
         left: '185px',
         enter: 'going-right-enter 0.3s',
         leave: 'going-right-leave 0.3s',
-        duration: 3000,
+        // duration: 3000,
       },
       data: {
         bgColor: 'orange',

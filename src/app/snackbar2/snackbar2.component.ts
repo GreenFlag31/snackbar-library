@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SnackbarService } from '../../../projects/ngx-modal-ease/src/lib/snackbar/snackbar.service';
+import { SnackbarService } from '../../../projects/ngx-snackbar-ease/src/public-api';
 
 @Component({
   selector: 'app-snackbar2',

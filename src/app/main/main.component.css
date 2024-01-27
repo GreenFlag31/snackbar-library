@@ -100,8 +100,7 @@ main .S4 {
   margin: 1rem 0;
 }
 .S4-data-content input {
-  min-width: 400px;
-  max-width: 100%;
+  width: 100%;
   padding: 0.2rem;
   min-height: 36px;
 }

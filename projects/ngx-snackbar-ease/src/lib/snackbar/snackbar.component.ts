@@ -6,11 +6,10 @@ import {
   ChangeDetectionStrategy,
   ViewEncapsulation,
   OnInit,
-  Type,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Options } from './snackbar-options';
-import { Observable, fromEvent } from 'rxjs';
+import { Observable, Subscription, debounceTime, fromEvent } from 'rxjs';
 import { InternalSnackbarService } from './internal-snackbar.service';
 
 @Component({
@@ -28,8 +27,10 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
   timeOutSnackbar!: number;
   snackbarAnimationEnd!: Observable<Event>;
   snackbarLeaveAnimation = '';
-  snackbarClosed = false;
   ngxUniqueID = '';
+  resizeSubscription!: Subscription;
+  originalLeftPosition = '';
+  MARGIN_LEFT = 20;
 
   constructor(
     private internalSnackbarService: InternalSnackbarService,
@@ -37,8 +38,7 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
   ) {}
 
   /**
-   * Initialise variable and escape key on document.
-   * Multiple snackbars might register multiple event listener, hence the 'layerLevel' variable and two times the condition check for the escape option.
+   * Initialise variables.
    */
   ngOnInit() {
     this.options = this.internalSnackbarService.options;
@@ -47,8 +47,30 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
     this.internalSnackbarService.snackbarInstances.push(this);
   }
 
+  handleResize() {
+    const { width } = this.snackbar.nativeElement.getBoundingClientRect();
+    const { paddingLeft, paddingRight } = window.getComputedStyle(
+      this.snackbar.nativeElement
+    );
+    const horizontalPaddings =
+      parseFloat(paddingLeft) + parseFloat(paddingRight);
+
+    this.snackbar.nativeElement.style.left = this.originalLeftPosition;
+    if (window.innerWidth < width + horizontalPaddings) {
+      this.snackbar.nativeElement.style.left = `${width / 2}px`;
+      // debugger;
+    }
+  }
+
   ngAfterViewInit() {
     this.addOptionsAndAnimations();
+    this.resizeSubscription = fromEvent(window, 'resize')
+      .pipe(debounceTime(300))
+      .subscribe(() => {
+        this.handleResize();
+      });
+
+    this.handleResize();
   }
 
   /**
@@ -63,15 +85,19 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
     this.snackbar.nativeElement.style.maxHeight =
       this.options?.size?.maxHeight || '';
     this.snackbar.nativeElement.style.padding =
-      this.options?.size?.padding || '0.5rem';
+      this.options?.size?.padding || '0 0.5rem';
 
     this.snackbarLeaveAnimation = this.options?.snackbar?.leave || '';
     this.snackbar.nativeElement.style.animation =
       this.options?.snackbar?.enter || '';
-    this.snackbar.nativeElement.style.top =
-      this.options?.snackbar?.top || '50%';
-    this.snackbar.nativeElement.style.left =
-      this.options?.snackbar?.left || '50%';
+    const genericPosition = this.options?.snackbar?.position;
+
+    if (this.options?.snackbar?.top && this.options.snackbar.left) {
+      this.snackbar.nativeElement.style.top = this.options?.snackbar?.top;
+      this.snackbar.nativeElement.style.left = this.options?.snackbar?.left;
+    } else if (genericPosition) {
+      this.positionSnackbar(genericPosition);
+    }
 
     this.snackbarAnimationEnd = fromEvent(
       this.snackbar.nativeElement,
@@ -84,24 +110,53 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
         this.internalSnackbarService.close(this);
       }, duration);
     }
+
+    this.originalLeftPosition = this.snackbar.nativeElement.style.left;
   }
 
-  removeElementIfNotAnimated(element: HTMLDivElement, animation: string) {
-    if (!animation) {
-      element.remove();
+  /**
+   * Position the snackbar relative to user's choice.
+   */
+  positionSnackbar(position: string) {
+    const { width, height } =
+      this.snackbar.nativeElement.getBoundingClientRect();
 
-      this.snackbarClosed = true;
+    if (position === 'bottom') {
+      this.snackbar.nativeElement.style.top = `calc(100% - ${
+        height / 2
+      }px - 10px)`;
+      return;
+    } else if (position === 'top') {
+      this.snackbar.nativeElement.style.top = `calc(${height / 2}px + 10px)`;
+      return;
+    }
+
+    if (position.includes('bottom')) {
+      this.snackbar.nativeElement.style.top = `calc(100% - ${
+        height / 2
+      }px - 50px)`;
+    } else {
+      this.snackbar.nativeElement.style.top = `calc(${height / 2}px + 50px)`;
+    }
+
+    if (position.includes('left')) {
+      this.snackbar.nativeElement.style.left = `calc(${width / 2}px + ${
+        this.MARGIN_LEFT
+      }px)`;
+    } else {
+      this.snackbar.nativeElement.style.left = `calc(100% - ${width / 2}px - ${
+        this.MARGIN_LEFT
+      }px)`;
     }
   }
 
   /**
-   * Clean the DOM
-   * Apply the leaving animations and clean the DOM. Three different use cases.
-   * The instance of the content of the snackbar.
+   * Apply the leaving animations and clean the DOM.
    */
   close() {
     this.snackbar.nativeElement.style.animation = this.snackbarLeaveAnimation;
     clearTimeout(this.timeOutSnackbar);
+    this.resizeSubscription.unsubscribe();
 
     // First: no animation element
     if (!this.snackbarLeaveAnimation) {
@@ -111,7 +166,6 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
 
     this.snackbarAnimationEnd.subscribe(() => {
       this.snackbar.nativeElement.remove();
-      this.snackbarClosed = true;
       this.element.nativeElement.remove();
     });
   }
