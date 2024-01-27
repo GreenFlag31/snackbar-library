@@ -16,17 +16,15 @@ export class SnackbarService {
    * ```
    * this.snackbarService.open(snackbarContentComponent, {
    *   snackbar: {
-   *     enter: 'enter-scale-down 0.1s ease-out',
-   *     leave: 'fade-out 0.5s',
-   *   },
-   *   overlay: {
-   *     leave: 'fade-out 0.3s',
+   *     position: 'bottom-left',
+   *     enter: 'going-right-enter 0.3s ease-out',
+   *     leave: 'going-right-leave 0.3s ease-out',
    *   },
    *   data: {
    *     type: 'Angular snackbar library',
    *   },
    * })
-   * .subscribe((dataFromComponent) => {
+   * .subscribe((dataFromsnackbarContentComponent) => {
    *    ...
    * });
    * ```
@@ -37,8 +35,9 @@ export class SnackbarService {
 
   /**
    * Close the current snackbar.
+   * @param instance Pass 'this' to identify the current snackbar instance.
    * @param data The optional data to emit on closing the snackbar (communication from snackbar to caller).
-   * Only completes observable if last closed.
+   * RxJs observable will automatically completes on close.
    */
   close(instance: any, data?: unknown) {
     this.internalSnackbarService.close(instance, data);

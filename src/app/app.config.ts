@@ -9,8 +9,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(
       SnackbarModule.forRoot({
-        // maximum: 3,
-        // closeOnNavigation: true,
+        maximum: 3,
+        closeOnNavigation: true,
       })
     ),
   ],

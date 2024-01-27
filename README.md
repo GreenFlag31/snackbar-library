@@ -18,9 +18,38 @@ You can install the library using the following command:
 npm i ngx-snackbar-ease
 ```
 
+Register the `SnackbarModule` in your `app.config.ts` and optionaly provide general options:
+
+```
+export const appConfig: ApplicationConfig = {
+  providers: [
+    ...
+    importProvidersFrom(
+      SnackbarModule.forRoot({
+        maximum: 3,
+        closeOnNavigation: true,
+      })
+    ),
+    ...
+  ],
+};
+```
+
+General options respect the `Config` interface:
+
+```
+Config {
+  <!-- maximum number of snackbars on a page -->
+  maximum?: number;
+
+  <!-- close active snackbar on navigation -->
+  closeOnNavigation?: boolean;
+}
+```
+
 # Options
 
-The snackbar supports a range of customisable options:
+The snackbar supports a range of options:
 
 ```
 Options {
@@ -91,8 +120,8 @@ In the following example, `snackbarContentComponent` is the content of the snack
         color: 'blueviolet',
       },
     })
-  .subscribe((dataFromSnackbarContentComponent) => {
-    ...
+    .subscribe((dataFromSnackbarContentComponent) => {
+      ...
   });
 ```
 
@@ -112,7 +141,7 @@ Publicly available methods have been exhaustively documented and typed, so you s
 
 # snackbarService
 
-This library exposes a `snackbarService` that contains the following API:
+This library exposes a `SnackbarService` that contains the following API:
 
 ```
 <!-- Opens a component inside the snackbar -->
@@ -267,6 +296,10 @@ This library comes with predefined and ready-to-use animations keyframes. Just f
 
 If you create your own keyframes, I would recommend to create a new file `snackbar-animations` (.css or preprocessor), and @import it in your `styles.css` (or preprocessor) at the root of the application.
 
+# Responsive
+
+Snackbars are responsive and will correctly render on smaller devices.
+
 # SSR (Server Side Rendering)
 
 This library supports Server Side Rendering (SSR). The snackbar will not instantiate during server-side execution, as it requires access to the DOM API.
@@ -277,7 +310,7 @@ This library has been documented and should provide autocomplete and help from y
 
 # Performance
 
-Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to create components. snackbar components will be removed from the DOM after closing.
+Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to create components. Snackbar components will be removed from the DOM after closing and their respective RxJs Subject to emit data will be automatically closed. The resize event to add responsiveness is debounced.
 
 # Change log
 
