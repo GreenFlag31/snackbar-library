@@ -164,7 +164,7 @@ closeAll();
 
 # Ready-to-use animations keyframes
 
-This library comes with predefined and ready-to-use animations keyframes. Just fill in the `name`, `duration` and `easing function` (more info on the `animation CSS shorthand` [here](https://developer.mozilla.org/en-US/docs/Web/CSS/animation)). Those animations are _position agnostic_, ie. there are adaptable to any positioning. Of course, you can create your own keyframes too.
+This library comes with predefined and ready-to-use animations keyframes. Just fill in the `name`, `duration` and `easing function` (more info on the `animation CSS shorthand` [here](https://developer.mozilla.org/en-US/docs/Web/CSS/animation)). Those animations are _position agnostic_, ie. they are adaptable to any positioning. Of course, you can create your own keyframes too.
 
 ```
 /* Recommended: 0.3s ease-out */
@@ -306,7 +306,7 @@ If you create your own keyframes, I would recommend to create a new file `snackb
 
 # Responsive
 
-Snackbars are responsive and will correctly render on smaller devices.
+Snackbars are responsive and will correctly render on smaller devices (debounced).
 
 # SSR (Server Side Rendering)
 
@@ -318,7 +318,7 @@ This library has been documented and should provide autocomplete and help from y
 
 # Performance
 
-Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to create components. Snackbar components will be removed from the DOM after closing and their respective RxJs Subject to emit data will be automatically closed. The resize event that add responsiveness is debounced and will be removed on close.
+Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to create components. Snackbar components will be removed from the DOM after closing and their respective RxJs Subject to emit data will be automatically closed. The resize event that add responsiveness is debounced and will be removed on close. SetTimeout (useful for auto-close if duration is set) will be cleared.
 
 # Change log
 
