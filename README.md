@@ -66,7 +66,7 @@ Position =
 | <span style="background-color:#f2f2f2;">maxWidth</span>  | <span style="background-color:#f2f2f2;">100</span> | <span style="background-color:#f2f2f2;">Max width of the snackbar in percent. Can be defined in any measure unit.</span>                                                                              |
 | <span style="background-color:#f2f2f2;">padding</span>   | <span style="background-color:#f2f2f2;">0.5</span> | <span style="background-color:#f2f2f2;">Padding to be applied on the snackbar in rem. Can be defined in any measure unit.</span>                                                                      |
 
-| <span style="background-color:#f2f2f2;">data</span> | <span style="background-color:#f2f2f2;"></span> | <span style="background-color:#f2f2f2;">Data communication between components under the form of key-value pairs. Any type of data is supported.</span> |
+<span style="background-color:#f2f2f2;">data</span> | <span style="background-color:#f2f2f2;"></span> | <span style="background-color:#f2f2f2;">Data communication between components under the form of key-value pairs. Any type of data is supported.</span> |
 
 # Complete Example
 
