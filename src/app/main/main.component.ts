@@ -14,11 +14,11 @@ import { SnackbarService } from '../../../projects/ngx-snackbar-ease/src/public-
 })
 export class MainComponent {
   S0 = {
-    animation: 'going-right-enter',
+    animation: 'going-down-enter',
     duration: '0.3s',
     easing: 'ease-out',
   };
-  textToS4 = 'Will you dance until sunrise?';
+  dataToS4 = 'Will you dance until sunrise?';
   responseFromS4 = '';
 
   constructor(private snackbarService: SnackbarService) {}
@@ -26,9 +26,7 @@ export class MainComponent {
   onS0Open() {
     this.snackbarService.open(SnackbarContentComponent, {
       snackbar: {
-        // top: 'calc(100% - 40px)',
-        // left: '50%',
-        position: 'bottom-left',
+        position: 'top',
         enter: `${this.S0.animation} ${this.S0.duration} ${this.S0.easing}`,
       },
     });
@@ -38,12 +36,12 @@ export class MainComponent {
     this.snackbarService.open(SnackbarContentComponent, {
       snackbar: {
         position: 'bottom-left',
-        enter: 'scale-enter 0.2s ease-out',
-        // leave: 'going-down-leave 0.3s ease-out',
+        enter: 'going-right-enter 0.3s ease-out',
+        leave: 'going-right-leave 0.3s ease-out',
         duration: 4000,
       },
       data: {
-        color: 'blueviolet',
+        bgColor: 'blueviolet',
       },
     });
   }
@@ -55,7 +53,7 @@ export class MainComponent {
         left: 'calc(100% - 185px)',
         enter: 'going-left-enter 0.3s',
         leave: 'going-left-leave 0.3s',
-        // duration: 4000,
+        duration: 3000,
       },
       data: {
         bgColor: 'blue',
@@ -66,11 +64,10 @@ export class MainComponent {
   onS3Open() {
     this.snackbarService.open(SnackbarContentComponent, {
       snackbar: {
-        top: '90%',
-        left: '185px',
-        enter: 'going-right-enter 0.3s',
-        leave: 'going-right-leave 0.3s',
-        // duration: 3000,
+        position: 'top-right',
+        enter: 'going-left-enter 0.3s',
+        leave: 'going-left-leave 0.3s',
+        duration: 2000,
       },
       data: {
         bgColor: 'orange',
@@ -82,12 +79,11 @@ export class MainComponent {
     this.snackbarService
       .open(Snackbar2Component, {
         snackbar: {
-          top: '90%',
-          left: '50%',
+          position: 'bottom',
           enter: 'bounce-in 0.7s ',
         },
         data: {
-          text: this.textToS4,
+          text: this.dataToS4,
         },
       })
       .subscribe((response) => {

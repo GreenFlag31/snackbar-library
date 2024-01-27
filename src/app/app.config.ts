@@ -7,11 +7,6 @@ import { SnackbarModule } from '../../projects/ngx-snackbar-ease/src/public-api'
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    importProvidersFrom(
-      SnackbarModule.forRoot({
-        maximum: 3,
-        closeOnNavigation: true,
-      })
-    ),
+    importProvidersFrom(SnackbarModule.forRoot()),
   ],
 };

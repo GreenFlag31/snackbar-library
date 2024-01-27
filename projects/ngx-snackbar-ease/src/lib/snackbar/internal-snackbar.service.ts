@@ -42,6 +42,7 @@ export class InternalSnackbarService {
       this.router.events
         .pipe(filter((event) => event instanceof NavigationEnd))
         .subscribe(() => {
+          this.disableAnimationsOnNavigation();
           this.closeAll();
         });
     }
@@ -109,6 +110,12 @@ export class InternalSnackbarService {
     currentSubject.complete();
 
     this.subjectsAndItsID.splice(indexCurrentInstance, 1);
+  }
+
+  private disableAnimationsOnNavigation() {
+    for (const snackbar of this.snackbarInstances) {
+      snackbar.snackbarLeaveAnimation = '';
+    }
   }
 
   closeAll() {

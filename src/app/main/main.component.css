@@ -104,8 +104,7 @@ main .S4 {
   padding: 0.2rem;
   min-height: 36px;
 }
-main button.close-all,
-main .nav-away {
+main button.close-all {
   color: #000;
 }
 .close-all-container {

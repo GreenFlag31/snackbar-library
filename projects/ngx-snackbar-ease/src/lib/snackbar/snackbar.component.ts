@@ -30,7 +30,6 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
   ngxUniqueID = '';
   resizeSubscription!: Subscription;
   originalLeftPosition = '';
-  MARGIN_LEFT = 20;
 
   constructor(
     private internalSnackbarService: InternalSnackbarService,
@@ -47,6 +46,10 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
     this.internalSnackbarService.snackbarInstances.push(this);
   }
 
+  /**
+   * Handle resize.
+   * Defaulted to large screens.
+   */
   handleResize() {
     const { width } = this.snackbar.nativeElement.getBoundingClientRect();
     const { paddingLeft, paddingRight } = window.getComputedStyle(
@@ -58,7 +61,6 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
     this.snackbar.nativeElement.style.left = this.originalLeftPosition;
     if (window.innerWidth < width + horizontalPaddings) {
       this.snackbar.nativeElement.style.left = `${width / 2}px`;
-      // debugger;
     }
   }
 
@@ -74,7 +76,7 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
   }
 
   /**
-   * Add options and animations
+   * Add options and animations.
    * Apply user style and animations, listen to animation ends. Apply z-indexes on overlay and snackbar, with 1000 as incremental value.
    */
   addOptionsAndAnimations() {
@@ -115,7 +117,7 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
   }
 
   /**
-   * Position the snackbar relative to user's choice.
+   * Generic positioning the snackbar relative to user's choice.
    */
   positionSnackbar(position: string) {
     const { width, height } =
@@ -140,25 +142,23 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
     }
 
     if (position.includes('left')) {
-      this.snackbar.nativeElement.style.left = `calc(${width / 2}px + ${
-        this.MARGIN_LEFT
-      }px)`;
+      this.snackbar.nativeElement.style.left = `calc(${width / 2}px + 20px)`;
     } else {
-      this.snackbar.nativeElement.style.left = `calc(100% - ${width / 2}px - ${
-        this.MARGIN_LEFT
-      }px)`;
+      this.snackbar.nativeElement.style.left = `calc(100% - ${
+        width / 2
+      }px - 20px)`;
     }
   }
 
   /**
    * Apply the leaving animations and clean the DOM.
+   * Either removes directly the element (no animation) or waits until animation has completed.
    */
   close() {
     this.snackbar.nativeElement.style.animation = this.snackbarLeaveAnimation;
     clearTimeout(this.timeOutSnackbar);
     this.resizeSubscription.unsubscribe();
 
-    // First: no animation element
     if (!this.snackbarLeaveAnimation) {
       this.element.nativeElement.remove();
       return;

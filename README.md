@@ -42,7 +42,7 @@ Config {
   <!-- maximum number of snackbars on a page -->
   maximum?: number;
 
-  <!-- close active snackbars on navigation -->
+  <!-- close active snackbars on navigation (animations disabled) -->
   closeOnNavigation?: boolean;
 }
 ```
@@ -97,7 +97,7 @@ Position =
 | <span style="background-color:#f2f2f2;">padding</span>   | <span style="background-color:#f2f2f2;">0 0.5</span> | <span style="background-color:#f2f2f2;">Padding to be applied on the snackbar in rem. Can be defined in any measure unit.</span>                                                                                                                       |
 | <span style="background-color:#f2f2f2;">data</span>      | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Data communication between components under the form of key-value pairs. Any type of data is supported.</span>                                                                                                 |
 
-You have the choice for positioning between a generic positioning or fine grained control with `top` and `left` values.
+You have the choice for the snackbar positioning between a generic positioning or fine grained control with `top` and `left` values.
 
 # Complete Example
 
@@ -316,7 +316,7 @@ This library has been documented and should provide autocomplete and help from y
 
 # Performance
 
-Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to create components. Snackbar components will be removed from the DOM after closing and their respective RxJs Subject to emit data will be automatically closed. The resize event to add responsiveness is debounced and will be removed on close.
+Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to create components. Snackbar components will be removed from the DOM after closing and their respective RxJs Subject to emit data will be automatically closed. The resize event that add responsiveness is debounced and will be removed on close.
 
 # Change log
 
