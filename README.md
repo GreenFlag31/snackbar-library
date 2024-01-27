@@ -60,6 +60,7 @@ Position =
 | <span style="background-color:#f2f2f2;">top</span>   | <span style="background-color:#f2f2f2;">50</span> | <span style="background-color:#f2f2f2;">Top position of the snackbar in percent. Can be defined in any measure unit.</span>                                                                           |
 | left                                                 | 50                                                | Left position of the snackbar in percent. Can be defined in any measure unit.                                                                                                                         |
 
+|
 | <span style="background-color:#f2f2f2;">minHeight</span> | <span style="background-color:#f2f2f2;"></span> | <span style="background-color:#f2f2f2;">Minimum height of the snackbar. Can be defined in any measure unit.</span> |
 | <span style="background-color:#f2f2f2;">height</span> | <span style="background-color:#f2f2f2;"></span> | <span style="background-color:#f2f2f2;">Height of the snackbar. Can be defined in any measure unit.</span> |
 | <span style="background-color:#f2f2f2;">width</span> | <span style="background-color:#f2f2f2;"></span> | <span style="background-color:#f2f2f2;">Width of the snackbar. Can be defined in any measure unit.</span> |
