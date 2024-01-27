@@ -158,9 +158,9 @@ close(instance: any, data?: unknown);
 closeAll();
 ```
 
-# Ready-to-use animations keyframes
-
 <a id="ready-to-use"></a>
+
+# Ready-to-use animations keyframes
 
 This library comes with predefined and ready-to-use animations keyframes. Just fill in the `name`, `duration` and `easing function` (more info on the `animation CSS shorthand` [here](https://developer.mozilla.org/en-US/docs/Web/CSS/animation)). Those animations are _position agnostic_, ie. there are adaptable to any positioning. Of course, you can create your own keyframes too.
 
