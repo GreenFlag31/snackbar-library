@@ -143,7 +143,7 @@ Passing `this` as first argument is necessary to identify the current snackbar i
 
 Publicly available methods have been exhaustively documented and typed, so you should get autocomplete and help from your code editor. Press on `CTRL + space` to get help on the available properties in the `Options` object.
 
-# snackbarService
+# SnackbarService
 
 This library exposes a `SnackbarService` that contains the following API:
 
@@ -160,7 +160,7 @@ closeAll();
 
 # Ready-to-use animations keyframes
 
-This library comes with predefined and ready-to-use animations keyframes. Just fill in the `name`, `duration` and `easing function` (more info on the `animation CSS shorthand` [here](https://developer.mozilla.org/en-US/docs/Web/CSS/animation)). Those animations are _position agnostic_, there are adaptable to any positioning. Of course, you can create your own keyframes too.
+This library comes with predefined and ready-to-use animations keyframes. Just fill in the `name`, `duration` and `easing function` (more info on the `animation CSS shorthand` [here](https://developer.mozilla.org/en-US/docs/Web/CSS/animation)). Those animations are _position agnostic_, ie. there are adaptable to any positioning. Of course, you can create your own keyframes too.
 
 ```
 /* Recommended: 0.3s ease-out */
@@ -314,7 +314,7 @@ This library has been documented and should provide autocomplete and help from y
 
 # Performance
 
-Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to create components. Snackbar components will be removed from the DOM after closing and their respective RxJs Subject to emit data will be automatically closed. The resize event to add responsiveness is debounced.
+Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to create components. Snackbar components will be removed from the DOM after closing and their respective RxJs Subject to emit data will be automatically closed. The resize event to add responsiveness is debounced and will be removed on close.
 
 # Change log
 
