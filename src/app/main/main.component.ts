@@ -35,9 +35,9 @@ export class MainComponent {
   onS1Open() {
     this.snackbarService.open(SnackbarContentComponent, {
       snackbar: {
-        position: 'top-right',
-        enter: 'going-left-enter 0.3s ease-out',
-        leave: 'going-left-leave 0.3s ease-in',
+        position: 'bottom-left',
+        enter: 'going-right-enter 0.3s ease-out',
+        leave: 'going-right-leave 0.3s ease-in',
         duration: 2000,
       },
       data: {
@@ -52,7 +52,7 @@ export class MainComponent {
         position: 'bottom-right',
         enter: 'going-left-enter 0.3s',
         leave: 'going-left-leave 0.3s',
-        // duration: 3000,
+        duration: 3000,
       },
       data: {
         bgColor: 'blue',
@@ -63,9 +63,9 @@ export class MainComponent {
   onS3Open() {
     this.snackbarService.open(SnackbarContentComponent, {
       snackbar: {
-        position: 'bottom-right',
-        enter: 'going-left-enter 0.3s ease-out',
-        leave: 'going-left-leave 0.3s ease-in',
+        position: 'top-left',
+        enter: 'going-right-enter 0.3s ease-out',
+        leave: 'going-right-leave 0.3s ease-in',
         duration: 2000,
       },
       data: {
