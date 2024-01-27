@@ -256,10 +256,3 @@ Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPus
 # Report a Bug
 
 Please provide a detailed description of the encountered bug, including your options and the steps/actions that led to the issue. An accurate description will help me to reproduce the issue.
-#   s n a c k b a r - l i b r a r y 
- 
- #   s n a c k b a r - l i b r a r y 
- 
- #   s n a c k b a r - l i b r a r y 
- 
- 
