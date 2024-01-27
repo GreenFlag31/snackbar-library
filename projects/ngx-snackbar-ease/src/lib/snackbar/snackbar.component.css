@@ -8,8 +8,7 @@
   z-index: 2000;
 }
 
-/* top: '90%',
-left: '15%', */
+/* Recommended: 0.3s ease-out */
 @keyframes going-right-enter {
   from {
     transform: translate(-200%, -50%);
@@ -19,6 +18,7 @@ left: '15%', */
   }
 }
 
+/* Recommended: 0.3s ease-out */
 @keyframes going-right-leave {
   from {
     transform: translate(-50%, -50%);
@@ -28,8 +28,7 @@ left: '15%', */
   }
 }
 
-/* top: '90%',
-left: '80%', */
+/* Recommended: 0.3s ease-out */
 @keyframes going-left-enter {
   from {
     transform: translate(100%, -50%);
@@ -39,6 +38,7 @@ left: '80%', */
   }
 }
 
+/* Recommended: 0.3s ease-out */
 @keyframes going-left-leave {
   from {
     transform: translate(-50%, -50%);
@@ -48,8 +48,7 @@ left: '80%', */
   }
 }
 
-/* top: '15%',
-left: '50%', */
+/* Recommended: 0.3s ease-out */
 @keyframes going-down-enter {
   from {
     transform: translate(-50%, -200%);
@@ -59,6 +58,7 @@ left: '50%', */
   }
 }
 
+/* Recommended: 0.3s ease-out */
 @keyframes going-down-leave {
   from {
     transform: translate(-50%, -50%);
@@ -68,8 +68,7 @@ left: '50%', */
   }
 }
 
-/* top: '90%',
-left: '50%', */
+/* Recommended: 0.3s ease-out */
 @keyframes going-up-enter {
   from {
     transform: translate(-50%, 100%);
@@ -79,6 +78,7 @@ left: '50%', */
   }
 }
 
+/* Recommended: 0.3s ease-out */
 @keyframes going-up-leave {
   from {
     transform: translate(-50%, -50%);
@@ -88,8 +88,7 @@ left: '50%', */
   }
 }
 
-/* top: '90%',
-left: '50%', */
+/* Recommended: 0.2s ease-out */
 @keyframes scale-enter {
   from {
     transform: scale(0.9) translate(-50%, -50%);

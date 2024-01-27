@@ -59,7 +59,8 @@ Position =
 | leave                                                    |                                                      | Define the leave animation for the snackbar respecting the [shorthand animation property](https://developer.mozilla.org/en-US/docs/Web/CSS/animation).                                                |
 | <span style="background-color:#f2f2f2;">top</span>       | <span style="background-color:#f2f2f2;">50</span>    | <span style="background-color:#f2f2f2;">Top position of the snackbar in percent. Can be defined in any measure unit.</span>                                                                           |
 | left                                                     | 50                                                   | Left position of the snackbar in percent. Can be defined in any measure unit.                                                                                                                         |
-| <span style="background-color:#f2f2f2;">position</span>  | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Generic positioning of the snackbar respecting the `Position` type.</span>                                                                                    |
+| <span style="background-color:#f2f2f2;">position</span>  | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Generic positioning of the snackbar respecting the `Position` type (see above).</span>                                                                        |
+| <span style="background-color:#f2f2f2;">duration</span>  | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Duration of the snackbar in ms.</span>                                                                                                                        |
 | <span style="background-color:#f2f2f2;">minHeight</span> | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Minimum height of the snackbar. Can be defined in any measure unit.</span>                                                                                    |
 | <span style="background-color:#f2f2f2;">height</span>    | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Height of the snackbar. Can be defined in any measure unit.</span>                                                                                            |
 | <span style="background-color:#f2f2f2;">width</span>     | <span style="background-color:#f2f2f2;"></span>      | <span style="background-color:#f2f2f2;">Width of the snackbar. Can be defined in any measure unit.</span>                                                                                             |
@@ -74,38 +75,36 @@ Inject the snackbarService through regular dependency injection in your componen
 In the following example, `snackbarContentComponent` is the content of the snackbar and should be provided as first parameter. As second parameter, provide an object respecting the `Options` interface (see above).
 
 ```
-  this.snackbarService.open(snackbarContentComponent, {
-    snackbar: {
-      <!-- animation -->
-      enter: 'enter-scale-down 0.1s ease-out',
-    },
-    overlay: {
-      <!-- animation -->
-      leave: 'fade-out 0.3s',
-    },
-    size: {
-      <!-- snackbar configuration -->
-      width: '400px',
-    },
-    data: {
-      <!-- data to snackbarContentComponent -->
-      type: 'Angular snackbar library',
-    },
-  })
-  .subscribe((dataFromsnackbarContentComponent) => {
+  this.snackbarService
+    .open(SnackbarContentComponent, {
+      snackbar: {
+        <!-- Generic positioning -->
+        position: 'bottom-left',
+        <!-- animations -->
+        enter: 'going-right-enter 0.3s ease-out',
+        leave: 'going-right-leave 0.3s ease-out',
+        <!-- Auto close in 4 seconds -->
+        duration: 4000,
+      },
+      data: {
+        <!-- Data to send to SnackbarContentComponent -->
+        color: 'blueviolet',
+      },
+    })
+  .subscribe((dataFromSnackbarContentComponent) => {
     ...
   });
 ```
 
-Any type of data can be provided between components. Create the corresponding property (here, `type`) in your component (here, `snackbarContentComponent`) and the property will be assigned with the provided value.
+Any type of data can be provided between components. Create the corresponding property (here, `color`) in your component (here, `SnackbarContentComponent`) and the property will be assigned with the provided value.
 
-In your `snackbarContentComponent`:
-To pass information from the `snackbarContentComponent` to your current component, inject the `snackbarService` through regular dependency injection and call the `close(data)` method from the service with any data you wish to send back to your component. This method returns an RxJs subject, so subscribe to it as shown in the above example. It is not necessary to unsubscribe from the subscription since it will automatically `complete()` in the service.
+In your `SnackbarContentComponent`:
+To pass information from the `SnackbarContentComponent` to your current component, inject the `SnackbarService` through regular dependency injection and call the `close(this, data)` method from the service with any data you wish to send back to your component. This method returns an RxJs subject, so subscribe to it as shown in the above example. It is not necessary to unsubscribe from the subscription since it will automatically `complete()` in the service. Passing `this` as first argument is necessary to identify the current snackbar instance (there can be multiple snackbars).
 
 ```
-  <!-- Inside snackbarContentComponent -->
+  <!-- Inside SnackbarContentComponent -->
   onClose() {
-    this.snackbarService.close(this.dataToSendBack);
+    this.snackbarService.close(this, this.dataToSendBack);
   }
 ```
 
@@ -120,70 +119,106 @@ This library exposes a `snackbarService` that contains the following API:
 open<C>(componentToCreate: Type<C>, options?: Options);
 
 <!-- Close a snackbar with optional data to send back -->
-close(data?: unknown);
+close(instance: any, data?: unknown);
 
 <!-- Close all opened snackbars -->
 closeAll();
 ```
 
-NB: Z-index of overlay and snackbar start at 1000 and 2000 respectively. In case of multiple snackbars, z-indexes will be incremented by 1000.
-
 # Ready-to-use animations keyframes
 
-This library comes with predefined and ready-to-use animations keyframes. Just fill in the `name`, `duration` and `easing function` (more info on the `animation CSS shorthand` [here](https://developer.mozilla.org/en-US/docs/Web/CSS/animation)). Those animations are _position agnostic_, so if you wish to position your snackbar at other `top` and `left` values than default, it will correctly work. Of course, you can create your own keyframes too.
+This library comes with predefined and ready-to-use animations keyframes. Just fill in the `name`, `duration` and `easing function` (more info on the `animation CSS shorthand` [here](https://developer.mozilla.org/en-US/docs/Web/CSS/animation)). Those animations are _position agnostic_, there are adaptable to any positioning. Of course, you can create your own keyframes too.
 
 ```
-/* Recommended: 0.2s ease-out */
-@keyframes enter-going-down {
+/* Recommended: 0.3s ease-out */
+@keyframes going-right-enter {
   from {
-    transform: translate(-50%, -60%);
+    transform: translate(-200%, -50%);
   }
   to {
     transform: translate(-50%, -50%);
   }
 }
 
-/* Recommended: 0.2s linear */
-@keyframes enter-scaling {
+/* Recommended: 0.3s ease-out */
+@keyframes going-right-leave {
   from {
-    transform: scale(0.8) translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-200%, -50%);
+  }
+}
+
+/* Recommended: 0.3s ease-out */
+@keyframes going-left-enter {
+  from {
+    transform: translate(100%, -50%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Recommended: 0.3s ease-out */
+@keyframes going-left-leave {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(100%, -50%);
+  }
+}
+
+/* Recommended: 0.3s ease-out */
+@keyframes going-down-enter {
+  from {
+    transform: translate(-50%, -200%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Recommended: 0.3s ease-out */
+@keyframes going-down-leave {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-50%, -200%);
+  }
+}
+
+/* Recommended: 0.3s ease-out */
+@keyframes going-up-enter {
+  from {
+    transform: translate(-50%, 100%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Recommended: 0.3s ease-out */
+@keyframes going-up-leave {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-50%, 100%);
+  }
+}
+
+/* Recommended: 0.2s ease-out */
+@keyframes scale-enter {
+  from {
+    transform: scale(0.9) translate(-50%, -50%);
     transform-origin: left;
   }
   to {
     transform: scale(1) translate(-50%, -50%);
     transform-origin: left;
-  }
-}
-
-/* Recommended: 0.1s ease-out */
-@keyframes enter-scale-down {
-  from {
-    transform: scale(1.5) translate(-50%, -60%);
-    transform-origin: left;
-  }
-  to {
-    transform: scale(1) translate(-50%, -50%);
-    transform-origin: left;
-  }
-}
-
-/* Recommended: 0.3s linear */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Recommended: 0.3s linear */
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
   }
 }
 
@@ -209,28 +244,23 @@ This library comes with predefined and ready-to-use animations keyframes. Just f
   }
 }
 
-/* Recommended: 1s linear */
-@keyframes scale-rotate {
-  30% {
-    transform: scale(1.05) translate(-50%, -50%);
-    transform-origin: left;
+/* Recommended: 0.3s linear */
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
-  40%,
-  60% {
-    transform: rotate(-3deg) scale(1.05) translate(-50%, -50%);
-    transform-origin: left;
+  to {
+    opacity: 1;
   }
-  50% {
-    transform: rotate(3deg) scale(1.05) translate(-50%, -50%);
-    transform-origin: left;
+}
+
+/* Recommended: 0.3s linear */
+@keyframes fade-out {
+  from {
+    opacity: 1;
   }
-  70% {
-    transform: rotate(0deg) scale(1.05) translate(-50%, -50%);
-    transform-origin: left;
-  }
-  100% {
-    transform: scale(1) translate(-50%, -50%);
-    transform-origin: left;
+  to {
+    opacity: 0;
   }
 }
 ```

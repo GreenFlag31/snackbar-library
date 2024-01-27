@@ -15,8 +15,8 @@ import { SnackbarService } from '../../../projects/ngx-snackbar-ease/src/public-
 export class MainComponent {
   S0 = {
     animation: 'going-right-enter',
-    duration: '0.2s',
-    easing: 'linear',
+    duration: '0.3s',
+    easing: 'ease-out',
   };
   textToS4 = 'Will you dance until sunrise?';
   responseFromS4 = '';
@@ -37,14 +37,13 @@ export class MainComponent {
   onS1Open() {
     this.snackbarService.open(SnackbarContentComponent, {
       snackbar: {
-        top: '40px',
-        left: '50%',
-        enter: 'going-down-enter 0.3s',
-        leave: 'going-down-leave 0.3s',
-        // duration: 2000,
+        position: 'bottom-left',
+        enter: 'scale-enter 0.2s ease-out',
+        // leave: 'going-down-leave 0.3s ease-out',
+        duration: 4000,
       },
       data: {
-        bgColor: 'blueviolet',
+        color: 'blueviolet',
       },
     });
   }
