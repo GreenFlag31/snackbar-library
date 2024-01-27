@@ -42,10 +42,12 @@ Config {
   <!-- maximum number of snackbars on a page -->
   maximum?: number;
 
-  <!-- close active snackbars on navigation (animations disabled) -->
+  <!-- close active snackbars on navigation (animations are disabled) -->
   closeOnNavigation?: boolean;
 }
 ```
+
+Simply pass `SnackbarModule.forRoot()` if you want to leave it default.
 
 # Options
 
