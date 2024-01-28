@@ -177,7 +177,7 @@ This library comes with predefined and ready-to-use animations keyframes. Just f
   }
 }
 
-/* Recommended: 0.3s ease-out */
+/* Recommended: 0.3s ease-in */
 @keyframes going-right-leave {
   from {
     transform: translateX(0);
@@ -187,7 +187,7 @@ This library comes with predefined and ready-to-use animations keyframes. Just f
   }
 }
 
-/* Recommended: 0.3s ease-in */
+/* Recommended: 0.3s ease-out */
 @keyframes going-left-enter {
   from {
     transform: translateX(150%);
