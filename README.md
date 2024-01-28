@@ -18,7 +18,7 @@ You can install the library using the following command:
 npm i ngx-snackbar-ease
 ```
 
-Register the `SnackbarModule` in your `app.config.ts` and optionaly provide general options:
+Register the `SnackbarModule` in your `app.config.ts` and optionally provide general options:
 
 ```
 export const appConfig: ApplicationConfig = {
