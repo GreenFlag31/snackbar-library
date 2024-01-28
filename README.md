@@ -316,10 +316,14 @@ This library has been documented and should provide autocomplete and help from y
 
 # Performance
 
-Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to create components. Snackbar components will be removed from the DOM after closing and their respective RxJs Subject to emit data will be automatically closed. The resize event that add responsiveness is debounced and will be removed on close. SetTimeout (useful for auto-close if duration is set) will be cleared.
+Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPush` strategy. This library respects Angular's mindset and use the Angular API to dynamically create components. Snackbar components will be removed from the DOM after closing and their respective RxJs Subject to emit data will be automatically closed. The resize event that add responsiveness is debounced and will be removed on close. SetTimeout (useful for auto-close if duration is set) will be cleared.
 
 # Change log
 
 # Report a Bug
 
 Please provide a detailed description of the encountered bug, including your options and the steps/actions that led to the issue. An accurate description will help me to reproduce the issue.
+
+# Ngx-X-ease serie
+
+You like this library? Discover the ngx-ease serie [here](https://www.npmjs.com/~greenflag31).
