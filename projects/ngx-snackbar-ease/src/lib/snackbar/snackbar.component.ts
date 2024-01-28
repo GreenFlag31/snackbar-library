@@ -30,6 +30,7 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
   ngxUniqueID = '';
   resizeSubscription!: Subscription;
   originalLeftPosition = '';
+  horizontalPaddingsSnackbar = 0;
 
   constructor(
     private internalSnackbarService: InternalSnackbarService,
@@ -48,19 +49,14 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
 
   /**
    * Handle resize.
-   * Defaulted to large screens.
+   * Defaulted to large screen.
    */
   handleResize() {
     const { width } = this.snackbar.nativeElement.getBoundingClientRect();
-    const { paddingLeft, paddingRight } = window.getComputedStyle(
-      this.snackbar.nativeElement
-    );
-    const horizontalPaddings =
-      parseFloat(paddingLeft) + parseFloat(paddingRight);
 
     this.snackbar.nativeElement.style.left = this.originalLeftPosition;
 
-    if (window.innerWidth < width + horizontalPaddings) {
+    if (window.innerWidth < width + this.horizontalPaddingsSnackbar) {
       this.snackbar.nativeElement.style.left = '0';
     }
   }
@@ -72,6 +68,12 @@ export class NgxSnackbar implements OnInit, AfterViewInit {
       .subscribe(() => {
         this.handleResize();
       });
+
+    const { paddingLeft, paddingRight } = window.getComputedStyle(
+      this.snackbar.nativeElement
+    );
+    this.horizontalPaddingsSnackbar =
+      parseFloat(paddingLeft) + parseFloat(paddingRight);
 
     this.handleResize();
   }

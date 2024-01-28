@@ -324,6 +324,6 @@ Emphasis has been placed on performance, adopting `ChangeDetectionStrategy.OnPus
 
 Please provide a detailed description of the encountered bug, including your options and the steps/actions that led to the issue. An accurate description will help me to reproduce the issue.
 
-# Ngx-X-ease serie
+# Ngx-ease serie
 
 You like this library? Discover the ngx-ease serie [here](https://www.npmjs.com/~greenflag31).

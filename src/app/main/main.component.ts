@@ -4,6 +4,14 @@ import { RouterModule } from '@angular/router';
 import { Snackbar2Component } from '../snackbar2/snackbar2.component';
 import { FormsModule } from '@angular/forms';
 import { SnackbarService } from '../../../projects/ngx-snackbar-ease/src/public-api';
+import { Position } from '../../../projects/ngx-snackbar-ease/src/lib/snackbar/snackbar-options';
+
+interface Snackbar {
+  position: Position;
+  animation: string;
+  duration: string;
+  easing: string;
+}
 
 @Component({
   selector: 'app-main',
@@ -13,7 +21,8 @@ import { SnackbarService } from '../../../projects/ngx-snackbar-ease/src/public-
   styleUrl: './main.component.css',
 })
 export class MainComponent {
-  S0 = {
+  S0: Snackbar = {
+    position: 'top',
     animation: 'going-down-enter',
     duration: '0.3s',
     easing: 'ease-out',
@@ -26,7 +35,7 @@ export class MainComponent {
   onS0Open() {
     this.snackbarService.open(SnackbarContentComponent, {
       snackbar: {
-        position: 'top',
+        position: `${this.S0.position}`,
         enter: `${this.S0.animation} ${this.S0.duration} ${this.S0.easing}`,
       },
     });
