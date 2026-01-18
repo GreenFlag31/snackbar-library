@@ -1,3 +1,5 @@
+**Due to limited interest, this library is currently in maintenance mode. It is stable and well-designed, and active development will resume if sufficient interest is shown.**
+
 # ngx-snackbar-ease
 
 # Description
